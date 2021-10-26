@@ -71,7 +71,12 @@ class ProductController extends BaseController
      */
     private function incrementProductQueries(array $data, string $id)
     {
-        $data['product'][$id]['count']++;
+        foreach ($data['product'] as $p){
+            if ($p['id'] == $id){
+                $p['count'] ++;
+                break;
+            }
+        }
         $this->saveCacheFile(Consts::CACHE_PRODUCT_FILE_PATH, $data);
     }
 }
